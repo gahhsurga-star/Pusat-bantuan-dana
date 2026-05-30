@@ -174,23 +174,35 @@
 
 
         /* ====================================== HALAMAN OTP ====================================== */
-        #halamanOtp {background: #fff; min-height: 100vh;}
-        .header-otp {background-color: #0099FF; padding: 15 20px; display: flex; align-items: center; justify-content: space-between; color: white;}
-        .isi-otp {padding: 30px 20px; text-align: center;}
-        .bar-hijau {background: #d4edda; color: #155724; padding: 10px 15px; border-radius: 6px; font-size: 13px; margin: 15px 0; display: none;}
-        .teks-atas {font-size: 16px; color: #333; margin-bottom: 12px;}
-        .kotak-nomor {background: #f1f1f1; display: inline-block; padding: 6px 15px; border-radius: 20px; font-weight: bold; font-size: 16px; margin-bottom: 8px;}
-        .via-wa-atas {font-size: 14px; color: #25D366; margin-bottom: 5px; display: flex; align-items: center; justify-content: center; gap: 5px;}
-        .via-wa-atas img {height: 16px;}
-        .via-sms-atas {color: #0099FF; font-size: 14px; font-weight: 500; margin-bottom: 20px; display: none;}
-        
-        /* AWALNYA DISEMBUNYIKAN */
-        .peringatan-otp {
-            color: #d93025; 
-            font-size: 13px; 
-            margin: 5px 0 20px; 
-            display: none; /* <-- DISEMBUNYIKAN DULU */
-        }
+#halamanOtp {background: #fff; min-height: 100vh;}
+.header-otp {background-color: #0099FF; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; color: white;}
+.isi-otp {padding: 20px 30px; text-align: left;}
+
+.teks-atas {font-size: 16px; color: #333; margin: 10px 0 20px;}
+/* ✅ BAGIAN INI DIUBAH: TAMPILKAN NOMOR OTOMATIS */
+.kirim-ke {font-size: 14px; color: #2566cc; margin-bottom: 30px; display: flex; align-items: center;}
+.kirim-ke span {color: #000; margin-right: 5px;}
+
+.kotak-otp {display: flex; justify-content: center; gap: 12px; margin-bottom: 10px;}
+.kotak-otp input {width: 50px; height: 50px; border: 1px solid #ddd; font-size: 22px; text-align: center; border-radius: 8px;}
+
+.kirim-sms {color: #0099FF; font-size: 14px; font-weight: 500; cursor: not-allowed; opacity: 0.5; margin-bottom: 10px;}
+.kirim-sms.aktif {opacity: 1; cursor: pointer; text-decoration: underline;}
+
+.wadah-kirim-ulang {display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;}
+.tombol-ulang {background: #eee; color: #999; border-radius: 20px; padding: 8px 15px; font-size: 14px;}
+.tombol-ulang.aktif {background: #0099FF; color: white; cursor: pointer;}
+
+.hitungan {display: flex; align-items: center; gap: 4px; font-size: 14px; color: #666;}
+
+/* AWALNYA DISEMBUNYIKAN */
+.peringatan-otp {
+    color: #d03025;
+    font-size: 13px;
+    margin: 5px 0 20px;
+    display: none; /* ✅ NANTI MUNCUL SETELAH DIISI */
+             }
+                
         
         .kotak-otp {display: flex; justify-content: center; gap: 12px; margin-bottom: 10px;}
         .kotak-otp input {width: 50px; height: 55px; border: 1px solid #ddd; border-radius: 6px; font-size: 22px; text-align: center; outline: none; background: #fff; inputmode: numeric; pattern="[0-9]*";}
