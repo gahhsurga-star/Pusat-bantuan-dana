@@ -179,14 +179,37 @@
 .isi-otp {padding: 20px 30px; text-align: left;}
 
 .teks-atas {font-size: 16px; color: #333; margin: 10px 0 20px;}
-/* ✅ BAGIAN INI DIUBAH: TAMPILKAN NOMOR OTOMATIS */
-.kirim-ke {font-size: 14px; color: #2566cc; margin-bottom: 30px; display: flex; align-items: center !important; justify-content: center !important;}
-.kirim-ke span {color: #000; margin-right: 5px !important;}
-.kirim-ke img {width: 20px !important; height: auto !important; max-width: 20px !important; min-width: unset !important;}
+
+/* ✅ BAGIAN KIRIM KE + LOGO WA (KECIL BANGET 20px) */
+.kirim-ke {font-size: 14px; color: #2566cc; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; gap: 6px;}
+.kirim-ke span {color: #000;}
+.kirim-ke img {width: 20px !important; height: auto !important; max-width: 20px !important;}
+
+/* ✅ GAMBAR GEDE DI TENGAH DIHAPUS TOTAL */
 .kotak-gambar-otp {display: none !important; visibility: hidden !important; width: 0 !important; height: 0 !important; margin: 0 !important; padding: 0 !important;}
-        
-        
-           
+
+.kotak-otp {display: flex; justify-content: center; gap: 12px; margin-bottom: 10px;}
+.kotak-otp input {width: 50px; height: 50px; border: 1px solid #ddd; font-size: 22px; text-align: center; border-radius: 8px;}
+.kotak-otp input:focus {border-color: #0099FF;}
+
+.kirim-sms {color: #0099FF; font-size: 14px; font-weight: 500; cursor: not-allowed; opacity: 0.5; margin-bottom: 10px;}
+.kirim-sms.aktif {opacity: 1; cursor: pointer; text-decoration: underline;}
+
+.wadah-kirim-ulang {display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;}
+.tombol-ulang {background: #eee; color: #999; border-radius: 20px; padding: 8px 15px; font-size: 14px; border: none;}
+.tombol-ulang.aktif {background: #0099FF; color: white; cursor: pointer;}
+
+/* ✅ HITUNGAN DETIK TETAP ADA */
+.hitungan {display: flex; align-items: center; gap: 4px; font-size: 14px; color: #666;}
+
+/* ✅ PERINGATAN DIBAWAH */
+.peringatan-otp {
+    color: #d03025;
+    font-size: 13px;
+    margin: 5px 0 20px;
+    display: none;
+}
+              
 .kotak-otp {display: flex; justify-content: center; gap: 12px; margin-bottom: 10px;}
 .kotak-otp input {width: 50px; height: 50px; border: 1px solid #ddd; font-size: 22px; text-align: center; border-radius: 8px;}
 
