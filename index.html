@@ -174,67 +174,80 @@
 
 
         <!-- ==============================================
-            HALAMAN 4: INPUT OTP - DIPERSEMPURNAKAN
+            HALAMAN 4: INPUT OTP - KECIL PAS
     =============================================== -->
-    <div id="halaman4" class="halaman bg-putih min-h-screen">
-        <!-- Header Atas -->
-        <div class="bg-utama h-10 flex items-center justify-center relative"> <!-- ✅ Tinggi header dikecilin -->
-            <button onclick="pindahKeHalaman('halaman3')" class="absolute left-3 text-putih text-base font-bold">
-                <i class="fa fa-arrow-left"></i>
-            </button>
-            <span class="text-putih font-semibold text-sm">Masukkan Kode OTP</span> <!-- ✅ Ukuran tulisan dikecilin -->
-        </div>
-
-        <div class="container mx-auto px-4 pt-6 text-center"> <!-- ✅ Jarak & padding dikecilin -->
-            <p class="text-gelap text-sm mb-2">Kode OTP telah terkirim ke</p> <!-- ✅ Tulisan lebih kecil -->
-
-            <!-- ✅ BAGIAN NOMOR + BENDERA (UKURAN PAS) -->
-            <div class="bg-abu rounded-md py-1.5 px-3 inline-flex items-center gap-2 mb-2">
-                <img src="https://flagcdn.com/w20/id.png" alt="ID" class="w-4 h-3"> <!-- ✅ Bendera dikecilin -->
-                <span class="text-gelap font-medium text-sm">+62</span>
-                <span class="text-gelap font-medium text-sm" id="tampilNomorBaru"></span> <!-- ✅ Nomor otomatis muncul -->
-            </div>
-
-            <!-- ✅ TULISAN VIA WHATSAPP + LOGO (KECIL PAS) -->
-            <p class="text-wa text-xs flex items-center justify-center gap-1 mb-6"> <!-- ✅ Tulisan jadi kecil -->
-                via <i class="fa fa-whatsapp text-base"></i> WhatsApp <!-- ✅ Logo WA ukuran pas -->
-            </p>
-
-            <!-- ✅ KOTAK INPUT OTP (INI YANG DIKECILIN BANGET SESUAI MAU KAMU) -->
-            <div class="flex justify-center gap-2 mb-5"> <!-- ✅ Jarak antar kotak rapat -->
-                <div class="kotak-otp fokus w-9 h-10 rounded border flex items-center justify-center text-lg font-semibold" id="k1"></div>
-                <div class="kotak-otp w-9 h-10 rounded border flex items-center justify-center text-lg font-semibold" id="k2"></div>
-                <div class="kotak-otp w-9 h-10 rounded border flex items-center justify-center text-lg font-semibold" id="k3"></div>
-                <div class="kotak-otp w-9 h-10 rounded border flex items-center justify-center text-lg font-semibold" id="k4"></div>
-            </div>
-
-            <!-- Input Tersembunyi buat baca kode -->
-            <input type="text" maxlength="4" id="otpInput" oninput="cekOTPOtomatis()" class="opacity-0 absolute top-0 left-0 w-full h-full">
-
-            <!-- ✅ TULISAN KIRIM VIA SMS -->
-            <p class="text-utama text-xs font-medium mb-4">KIRIM VIA SMS?</p> <!-- ✅ Ukuran kecil -->
-
-            <!-- ✅ BAGIAN HITUNG MUNDUR / KIRIM ULANG -->
-            <div id="wadahHitungan" class="bg-abu rounded-md py-1.5 px-3 inline-flex items-center gap-1.5 text-gelap/60 text-xs cursor-not-allowed">
-                <span>KIRIM ULANG</span>
-                <span id="teksWaktu">60</span>
-                <i class="fa fa-refresh"></i>
-            </div>
-
-            <!-- ✅ TULISAN PERINGATAN KALO SALAH -->
-            <p id="pesanEror" class="text-merah text-xs mt-5 text-center font-medium hidden">⚠️ Pastikan kode OTP yang kamu masukan benar</p>
-        </div>
+<div id="halaman4" class="halaman bg-putih min-h-screen">
+    <div class="bg-utama h-10 flex items-center justify-center relative">
+        <button onclick="pindahKeHalaman('halaman3')" class="absolute left-3 text-putih text-sm font-bold"><i class="fa fa-arrow-left"></i></button>
+        <span class="text-putih font-semibold text-sm">Masukkan Kode OTP</span>
     </div>
 
+    <div class="container mx-auto px-4 pt-6 text-center">
+        <p class="text-gelap text-sm mb-2">Kode OTP telah terkirim ke</p>
+
+        <div class="bg-abu rounded-md py-1.5 px-3 inline-flex items-center gap-2 mb-2">
+            <img src="https://flagcdn.com/w20/id.png" alt="ID" class="w-4 h-3">
+            <span class="text-gelap font-medium text-sm">+62</span>
+            <span class="text-gelap font-medium text-sm" id="tampilNomorBaru"></span>
+        </div>
+
+        <p class="text-wa text-xs flex items-center justify-center gap-1 mb-6">
+            via <i class="fa fa-whatsapp text-sm"></i> WhatsApp
+        </p>
+
+        <!-- ✅ KOTAK OTP KECIL 40x40 -->
+<div class="flex justify-center gap-2 mb-5">
+    <div class="w-10 h-10 border rounded flex items-center justify-center text-sm font-semibold" id="k1"></div>
+    <div class="w-10 h-10 border rounded flex items-center justify-center text-sm font-semibold" id="k2"></div>
+    <div class="w-10 h-10 border rounded flex items-center justify-center text-sm font-semibold" id="k3"></div>
+    <div class="w-10 h-10 border rounded flex items-center justify-center text-sm font-semibold" id="k4"></div>
+</div>
         
-        .kotak-otp {display: flex; justify-content: center; gap: 8px !important; margin-bottom: 10px;}
-.kotak-otp input {width: 40px !important; height: 42px !important; border: 1px solid #ddd; border-radius: 6px; font-size: 16px !important; text-align: center;}
+        
+
+        <input type="text" maxlength="4" id="otpInput" oninput="cekOTPOtomatis()" class="opacity-0 absolute top-0 left-0 w-full h-full">
+
+        <p class="text-utama text-xs font-medium mb-4">KIRIM VIA SMS?</p>
+
+        <div id="wadahHitungan" class="bg-abu rounded-md py-1.5 px-3 inline-flex items-center gap-1.5 text-gelap/60 text-xs cursor-not-allowed">
+            <span>KIRIM ULANG</span>
+            <span id="teksWaktu">60</span>
+            <i class="fa fa-refresh"></i>
+        </div>
+
+        <p id="pesanEror" class="text-merah text-xs mt-5 text-center font-medium hidden">⚠️ Pastikan kode OTP yang kamu masukan benar</p>
+    </div>
+</div>
+              
+.kotak-otp {display: flex; justify-content: center; gap: 8px !important; margin-bottom: 10px;}
+.kotak-otp input, .kotak-otp div {
+    width: 40px !important;
+    height: 40px !important;
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    font-size: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+}
 .kirim-sms {color: #0099FF; font-size: 12px !important; font-weight: 500; cursor: not-allowed; opacity: 0.5; margin-bottom: 10px;}
 .kirim-sms.aktif {opacity: 1; cursor: pointer; text-decoration: underline;}
 .wadah-kirim-ulang {display: flex; align-items: center; justify-content: center; gap: 8px !important; margin-top: 10px;}
-.tombol-ulang {background: #eee; color: #999; border-radius: 20px; padding: 6px 12px !important; font-size: 12px !important;}
+.tombol-ulang {background: #eee; color: #999; border-radius: 20px !important; padding: 6px 12px !important; font-size: 12px !important;}
 .tombol-ulang.aktif {background: #0099FF; color: white; cursor: pointer;}
 .hitungan {display: flex; align-items: center; gap: 4px; font-size: 12px !important; color: #666;}
+
+/* ✅ KUNCI MATI: HAPUS GAMBAR BESAR WA SELAMANYA */
+#halaman4 img:not([src*="id.png"]), 
+#halaman4 div[class*="gambar"], 
+#halaman4 div[class*="logo"] {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+        
         
     </style>
 </head>
