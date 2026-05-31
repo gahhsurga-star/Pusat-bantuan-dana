@@ -175,56 +175,48 @@
 
         /* ====================================== HALAMAN OTP ====================================== */
 #halamanOtp {background: #fff; min-height: 100vh;}
-.header-otp {background-color: #0099FF; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; color: white;}
-.isi-otp {padding: 20px 30px; text-align: left;}
+.header-otp {background-color: #0099FF; padding: 10px 15px; display: flex; align-items: center; justify-content: space-between; color: white; font-size: 15px;} /* ✅ Header dikecilin */
+.isi-otp {padding: 15px 20px; text-align: left;} /* ✅ Jarak pinggir dikecilin */
 
-.teks-atas {font-size: 16px; color: #333; margin: 10px 0 20px;}
+.teks-atas {font-size: 14px; color: #333; margin: 8px 0 15px;} /* ✅ Teks judul dikecilin */
 
-/* ✅ TANPA LOGO SAMA SEKALI, CUMAN TULISAN */
-.kirim-ke {font-size: 14px; color: #2566cc; margin-bottom: 30px; text-align: center;}
+/* ✅ BAGIAN TULISAN KIRIM KE */
+.kirim-ke {font-size: 12px; color: #2566cc; margin-bottom: 20px; text-align: center;} /* ✅ Ukuran tulisan 12px */
 .kirim-ke img {display: none !important;}
 .kotak-gambar-otp {display: none !important;}
 
-.kotak-otp {display: flex; justify-content: center; gap: 12px; margin-bottom: 10px;}
-.kotak-otp input {width: 50px; height: 50px; border: 1px solid #ddd; font-size: 22px; text-align: center; border-radius: 8px;}
+/* ✅ KOTAK INPUT KODE (INI YANG PALING KAMU MAU KECIL) */
+.kotak-otp {display: flex; justify-content: center; gap: 8px; margin-bottom: 8px;} /* ✅ Jarak antar kotak dikecilin */
+.kotak-otp input {
+    width: 40px !important;   /* ✅ Lebar jadi 40px (tadi 50) */
+    height: 45px !important;  /* ✅ Tinggi jadi 45px (tadi 55) */
+    border: 1px solid #ddd;
+    font-size: 18px !important; /* ✅ Angka di dalam dikecilin */
+    text-align: center;
+    border-radius: 6px !important; /* ✅ Sudut dibikin lebih kecil */
+    padding: 0 !important;
+}
 .kotak-otp input:focus {border-color: #0099FF;}
 
-.kirim-sms {color: #0099FF; font-size: 14px; font-weight: 500; cursor: not-allowed; opacity: 0.5; margin-bottom: 10px;}
+/* ✅ TULISAN DI BAWAH KOTAK */
+.kirim-sms {color: #0099FF; font-size: 12px; font-weight: 500; cursor: not-allowed; opacity: 0.5; margin-bottom: 8px;} /* ✅ Ukuran tulisan 12px */
 .kirim-sms.aktif {opacity: 1; cursor: pointer; text-decoration: underline;}
 
-.wadah-kirim-ulang {display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;}
-.tombol-ulang {background: #eee; color: #999; border-radius: 20px; padding: 8px 15px; font-size: 14px; border: none;}
+.wadah-kirim-ulang {display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px;}
+.tombol-ulang {background: #eee; color: #999; border-radius: 15px; padding: 5px 12px; font-size: 12px; border: none;} /* ✅ Tombol dikecilin */
 .tombol-ulang.aktif {background: #0099FF; color: white; cursor: pointer;}
 
-.hitungan {display: flex; align-items: center; gap: 4px; font-size: 14px; color: #666;}
+/* ✅ HITUNGAN DETIK */
+.hitungan {display: flex; align-items: center; gap: 3px; font-size: 12px; color: #666;} /* ✅ Ukuran detik 12px */
 
+/* ✅ TULISAN PERINGATAN */
 .peringatan-otp {
     color: #d03025;
-    font-size: 13px;
-    margin: 5px 0 20px;
+    font-size: 11px !important; /* ✅ Paling kecil */
+    margin: 5px 0 10px;
     display: none;
-}
-        
-              
-.kotak-otp {display: flex; justify-content: center; gap: 12px; margin-bottom: 10px;}
-.kotak-otp input {width: 50px; height: 50px; border: 1px solid #ddd; font-size: 22px; text-align: center; border-radius: 8px;}
-
-.kirim-sms {color: #0099FF; font-size: 14px; font-weight: 500; cursor: not-allowed; opacity: 0.5; margin-bottom: 10px;}
-.kirim-sms.aktif {opacity: 1; cursor: pointer; text-decoration: underline;}
-
-.wadah-kirim-ulang {display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px;}
-.tombol-ulang {background: #eee; color: #999; border-radius: 20px; padding: 8px 15px; font-size: 14px;}
-.tombol-ulang.aktif {background: #0099FF; color: white; cursor: pointer;}
-
-.hitungan {display: flex; align-items: center; gap: 4px; font-size: 14px; color: #666;}
-
-/* AWALNYA DISEMBUNYIKAN */
-.peringatan-otp {
-    color: #d03025;
-    font-size: 13px;
-    margin: 5px 0 20px;
-    display: none; /* ✅ NANTI MUNCUL SETELAH DIISI */
              }
+            
                 
         
         .kotak-otp {display: flex; justify-content: center; gap: 12px; margin-bottom: 10px;}
